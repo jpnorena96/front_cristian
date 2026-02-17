@@ -1,0 +1,72 @@
+.status-capsule {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-sm);
+    padding: 6px 14px;
+    border-radius: var(--radius-pill);
+    font-size: var(--font-xs);
+    font-weight: 500;
+    letter-spacing: 0.02em;
+    animation: fadeInScale var(--transition-base) ease forwards;
+    transition: all var(--transition-base);
+    backdrop-filter: blur(8px);
+}
+
+.status-capsule--exiting {
+    opacity: 0;
+    transform: scale(0.9);
+    transition: all var(--transition-slow);
+}
+
+.status-capsule--active {
+    animation: glowPulse 2s ease-in-out infinite;
+}
+
+/* Analyzing */
+.status-analyzing {
+    background: rgba(91, 141, 239, 0.12);
+    color: var(--status-analyzing);
+    border: 1px solid rgba(91, 141, 239, 0.25);
+}
+
+.status-analyzing .status-capsule__dot {
+    background: var(--status-analyzing);
+}
+
+/* Document */
+.status-document {
+    background: rgba(109, 212, 144, 0.12);
+    color: var(--status-document);
+    border: 1px solid rgba(109, 212, 144, 0.25);
+}
+
+.status-document .status-capsule__dot {
+    background: var(--status-document);
+}
+
+/* Risk */
+.status-risk {
+    background: rgba(239, 107, 91, 0.12);
+    color: var(--status-risk);
+    border: 1px solid rgba(239, 107, 91, 0.25);
+}
+
+.status-risk .status-capsule__dot {
+    background: var(--status-risk);
+}
+
+.status-capsule__icon {
+    font-size: var(--font-sm);
+    line-height: 1;
+}
+
+.status-capsule__label {
+    white-space: nowrap;
+}
+
+.status-capsule__dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    animation: pulse 1.5s ease-in-out infinite;
+}

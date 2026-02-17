@@ -1,0 +1,102 @@
+.chat-window {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    flex: 1;
+    min-width: 0;
+    background: var(--bg-primary);
+}
+
+/* --- Header --- */
+.chat-window__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: var(--header-height);
+    padding: 0 var(--space-lg);
+    border-bottom: 1px solid var(--border-subtle);
+    background: var(--bg-secondary);
+    gap: var(--space-md);
+    flex-shrink: 0;
+}
+
+.chat-window__menu {
+    display: none;
+    color: var(--text-secondary);
+    padding: var(--space-xs);
+    border-radius: var(--radius-sm);
+    transition: color var(--transition-fast);
+}
+
+.chat-window__menu:hover {
+    color: var(--text-primary);
+    background: var(--bg-hover);
+}
+
+.chat-window__header-center {
+    display: flex;
+    align-items: center;
+    gap: var(--space-md);
+    flex: 1;
+}
+
+.chat-window__header-title {
+    font-size: var(--font-md);
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+.chat-window__header-right {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+}
+
+.chat-window__status-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--status-document);
+    box-shadow: 0 0 6px rgba(109, 212, 144, 0.5);
+}
+
+.chat-window__status-label {
+    font-size: var(--font-xs);
+    color: var(--text-secondary);
+}
+
+/* --- Messages --- */
+.chat-window__messages {
+    flex: 1;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+.chat-window__messages-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-lg);
+    padding: var(--space-xl) var(--space-lg);
+    max-width: 800px;
+    margin: 0 auto;
+    width: 100%;
+}
+
+/* --- Responsive --- */
+@media (max-width: 768px) {
+    .chat-window__menu {
+        display: flex;
+    }
+
+    .chat-window__header {
+        padding: 0 var(--space-md);
+    }
+
+    .chat-window__messages-list {
+        padding: var(--space-md);
+    }
+
+    .chat-window__status-label {
+        display: none;
+    }
+}

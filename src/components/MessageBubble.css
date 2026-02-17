@@ -1,0 +1,199 @@
+.message-bubble {
+    display: flex;
+    gap: var(--space-md);
+    max-width: 85%;
+    animation: fadeIn var(--transition-base) ease forwards;
+    opacity: 1;
+    /* Fallback: ensure visible even if animation fails */
+}
+
+/* ... */
+
+.message-bubble__text {
+    font-size: var(--font-base);
+    line-height: 1.7;
+    color: #ffffff;
+}
+
+.message-bubble__text p,
+.message-paragraph {
+    color: inherit;
+    margin-bottom: var(--space-sm);
+}
+
+.message-bubble--user .message-bubble__text {
+    color: #ffffff;
+}
+
+.message-bubble--user {
+    flex-direction: row-reverse;
+    align-self: flex-end;
+    max-width: 70%;
+}
+
+.message-bubble--assistant {
+    align-self: flex-start;
+}
+
+.message-bubble__avatar {
+    width: 36px;
+    height: 36px;
+    min-width: 36px;
+    border-radius: var(--radius-md);
+    background: var(--gold-subtle);
+    border: 1px solid var(--border-gold);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: var(--font-lg);
+    margin-top: 2px;
+}
+
+.message-bubble__content {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xs);
+}
+
+.message-bubble--user .message-bubble__content {
+    background: linear-gradient(135deg, rgba(201, 169, 110, 0.15), rgba(201, 169, 110, 0.08));
+    border: 1px solid var(--border-gold);
+    border-radius: var(--radius-lg) var(--radius-lg) var(--space-xs) var(--radius-lg);
+    padding: var(--space-md);
+}
+
+.message-bubble--assistant .message-bubble__content {
+    background: var(--bg-card);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-lg) var(--radius-lg) var(--radius-lg) var(--space-xs);
+    padding: var(--space-md) var(--space-lg);
+}
+
+.message-bubble__sender {
+    font-size: var(--font-xs);
+    color: var(--gold-primary);
+    font-weight: 600;
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
+}
+
+.message-bubble__text {
+    font-size: var(--font-base);
+    line-height: 1.7;
+    color: #ffffff;
+}
+
+.message-bubble--user .message-bubble__text {
+    color: #ffffff;
+}
+
+.message-bubble__text strong {
+    color: var(--gold-primary);
+    font-weight: 600;
+}
+
+.message-paragraph {
+    margin-bottom: var(--space-sm);
+}
+
+.message-paragraph:last-child {
+    margin-bottom: 0;
+}
+
+.message-bubble__time {
+    font-size: 0.6875rem;
+    color: var(--text-tertiary);
+    align-self: flex-end;
+}
+
+/* --- Table --- */
+.message-table-wrapper {
+    overflow-x: auto;
+    margin: var(--space-md) 0;
+    border-radius: var(--radius-sm);
+    border: 1px solid var(--border-subtle);
+}
+
+.message-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: var(--font-sm);
+}
+
+.message-table th {
+    background: var(--bg-tertiary);
+    color: var(--gold-primary);
+    font-weight: 600;
+    text-align: left;
+    padding: var(--space-sm) var(--space-md);
+    border-bottom: 1px solid var(--border-medium);
+    white-space: nowrap;
+}
+
+.message-table td {
+    padding: var(--space-sm) var(--space-md);
+    border-bottom: 1px solid var(--border-subtle);
+    color: var(--text-secondary);
+}
+
+.message-table tr:last-child td {
+    border-bottom: none;
+}
+
+.message-table tr:hover td {
+    background: var(--bg-hover);
+}
+
+/* --- Typing Indicator --- */
+.message-bubble--typing .message-bubble__content {
+    padding: var(--space-md) var(--space-lg);
+}
+
+.typing-dots {
+    display: flex;
+    gap: 4px;
+    align-items: center;
+    height: 20px;
+}
+
+.typing-dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--gold-primary);
+    animation: dotBounce 1.4s ease-in-out infinite both;
+}
+
+@media (max-width: 768px) {
+    .message-bubble {
+        max-width: 95%;
+    }
+
+    .message-bubble--user {
+        max-width: 85%;
+    }
+}
+
+/* --- Actions --- */
+.message-actions {
+    margin-top: var(--space-sm);
+    display: flex;
+    justify-content: flex-start;
+}
+
+.message-copy-btn {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: var(--font-xs);
+    color: var(--text-secondary);
+    background: rgba(255, 255, 255, 0.05);
+    padding: 4px 8px;
+    border-radius: var(--radius-sm);
+    transition: all var(--transition-fast);
+}
+
+.message-copy-btn:hover {
+    background: rgba(255, 255, 255, 0.1);
+    color: var(--gold-primary);
+}

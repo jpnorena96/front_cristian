@@ -1,0 +1,375 @@
+/* ============================================
+   ANIMATED ICONS — Micro-interaction system
+   ============================================ */
+
+/* --- Base icon --- */
+.anim-icon {
+    display: inline-block;
+    transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* ═══════════ SCALES ═══════════ */
+.anim-icon--scales .anim-icon__beam {
+    transform-origin: 20px 12px;
+    animation: scalesRock 4s ease-in-out infinite;
+}
+
+.anim-icon--scales .anim-icon__pan--left {
+    animation: panSwing 4s ease-in-out infinite;
+}
+
+.anim-icon--scales .anim-icon__pan--right {
+    animation: panSwing 4s ease-in-out 0.15s infinite reverse;
+}
+
+@keyframes scalesRock {
+
+    0%,
+    100% {
+        transform: rotate(0deg);
+    }
+
+    25% {
+        transform: rotate(3deg);
+    }
+
+    75% {
+        transform: rotate(-3deg);
+    }
+}
+
+@keyframes panSwing {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    25% {
+        transform: translateY(1.5px);
+    }
+
+    75% {
+        transform: translateY(-1.5px);
+    }
+}
+
+/* ═══════════ BUILDING ═══════════ */
+.anim-icon--building .anim-icon__window {
+    animation: windowFlicker 5s ease-in-out infinite;
+}
+
+.anim-icon--building .anim-icon__window--d1 {
+    animation-delay: 0.5s;
+}
+
+.anim-icon--building .anim-icon__window--d2 {
+    animation-delay: 1.2s;
+}
+
+.anim-icon--building .anim-icon__window--d3 {
+    animation-delay: 0.8s;
+}
+
+.anim-icon--building .anim-icon__window--d4 {
+    animation-delay: 2s;
+}
+
+.anim-icon--building .anim-icon__window--d5 {
+    animation-delay: 1.6s;
+}
+
+@keyframes windowFlicker {
+
+    0%,
+    40%,
+    60%,
+    100% {
+        opacity: 0.4;
+    }
+
+    50% {
+        opacity: 0.9;
+    }
+}
+
+.anim-icon--building .anim-icon__structure {
+    stroke-dasharray: 100;
+    stroke-dashoffset: 100;
+    animation: drawLine 1.2s ease forwards;
+}
+
+.anim-icon--building .anim-icon__structure--delay {
+    animation-delay: 0.3s;
+}
+
+/* ═══════════ GLOBE ═══════════ */
+.anim-icon--globe .anim-icon__meridian {
+    animation: globeSpin 8s linear infinite;
+    transform-origin: center;
+}
+
+.anim-icon--globe .anim-icon__pin {
+    animation: pinBounce 2s ease-in-out infinite;
+}
+
+.anim-icon--globe .anim-icon__pin-line {
+    animation: pinBounce 2s ease-in-out infinite;
+}
+
+@keyframes globeSpin {
+    0% {
+        rx: 8;
+    }
+
+    25% {
+        rx: 2;
+    }
+
+    50% {
+        rx: 8;
+    }
+
+    75% {
+        rx: 14;
+    }
+
+    100% {
+        rx: 8;
+    }
+}
+
+@keyframes pinBounce {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-2px);
+    }
+}
+
+/* ═══════════ SHIELD ═══════════ */
+.anim-icon--shield .anim-icon__shield-body {
+    stroke-dasharray: 120;
+    stroke-dashoffset: 120;
+    animation: drawLine 1s ease forwards;
+}
+
+.anim-icon--shield .anim-icon__checkmark {
+    stroke-dasharray: 24;
+    stroke-dashoffset: 24;
+    animation: drawCheck 0.5s ease forwards 0.8s;
+}
+
+@keyframes drawCheck {
+    to {
+        stroke-dashoffset: 0;
+    }
+}
+
+/* ═══════════ DOCUMENT ═══════════ */
+.anim-icon--document .anim-icon__doc-body {
+    stroke-dasharray: 100;
+    stroke-dashoffset: 100;
+    animation: drawLine 1s ease forwards;
+}
+
+.anim-icon--document .anim-icon__doc-line {
+    animation: lineReveal 0.4s ease forwards;
+    opacity: 0;
+}
+
+.anim-icon--document .anim-icon__doc-line--d1 {
+    animation-delay: 0.6s;
+}
+
+.anim-icon--document .anim-icon__doc-line--d2 {
+    animation-delay: 0.8s;
+}
+
+@keyframes lineReveal {
+    from {
+        opacity: 0;
+        transform: translateX(-4px);
+    }
+
+    to {
+        opacity: 0.4;
+        transform: translateX(0);
+    }
+}
+
+/* ═══════════ SEARCH ═══════════ */
+.anim-icon--search .anim-icon__lens {
+    stroke-dasharray: 70;
+    stroke-dashoffset: 70;
+    animation: drawLine 0.8s ease forwards;
+}
+
+.anim-icon--search .anim-icon__handle {
+    stroke-dasharray: 14;
+    stroke-dashoffset: 14;
+    animation: drawLine 0.4s ease forwards 0.6s;
+}
+
+.anim-icon--search .anim-icon__glint {
+    animation: glintPulse 3s ease-in-out infinite;
+}
+
+@keyframes glintPulse {
+
+    0%,
+    100% {
+        opacity: 0.1;
+        r: 2;
+    }
+
+    50% {
+        opacity: 0.3;
+        r: 3;
+    }
+}
+
+/* ═══════════ WARNING ═══════════ */
+.anim-icon--warning .anim-icon__triangle {
+    stroke-dasharray: 100;
+    stroke-dashoffset: 100;
+    animation: drawLine 0.8s ease forwards;
+}
+
+.anim-icon--warning .anim-icon__excl-line {
+    animation: warningPulse 1.5s ease-in-out infinite;
+}
+
+.anim-icon--warning .anim-icon__excl-dot {
+    animation: warningPulse 1.5s ease-in-out 0.2s infinite;
+}
+
+@keyframes warningPulse {
+
+    0%,
+    100% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0.4;
+    }
+}
+
+/* ═══════════ USERS ═══════════ */
+.anim-icon--users .anim-icon__head {
+    stroke-dasharray: 34;
+    stroke-dashoffset: 34;
+    animation: drawLine 0.6s ease forwards;
+}
+
+.anim-icon--users .anim-icon__head--second {
+    animation-delay: 0.25s;
+}
+
+.anim-icon--users .anim-icon__body {
+    stroke-dasharray: 40;
+    stroke-dashoffset: 40;
+    animation: drawLine 0.7s ease forwards 0.3s;
+}
+
+.anim-icon--users .anim-icon__body--second {
+    animation-delay: 0.55s;
+}
+
+/* ═══════════ SPARKLE ═══════════ */
+.anim-icon--sparkle .anim-icon__star--main {
+    animation: sparkleRotate 4s ease-in-out infinite;
+    transform-origin: center;
+}
+
+.anim-icon--sparkle .anim-icon__star--small {
+    animation: sparkleFlicker 2s ease-in-out infinite;
+}
+
+@keyframes sparkleRotate {
+
+    0%,
+    100% {
+        transform: rotate(0deg) scale(1);
+    }
+
+    50% {
+        transform: rotate(15deg) scale(1.1);
+    }
+}
+
+@keyframes sparkleFlicker {
+
+    0%,
+    100% {
+        opacity: 0.5;
+        transform: scale(1);
+    }
+
+    50% {
+        opacity: 1;
+        transform: scale(1.3);
+    }
+}
+
+/* ═══════════ CHAT ═══════════ */
+.anim-icon--chat .anim-icon__bubble {
+    stroke-dasharray: 60;
+    stroke-dashoffset: 60;
+    animation: drawLine 0.8s ease forwards;
+}
+
+.anim-icon--chat .anim-icon__chat-dot {
+    animation: chatDotPulse 1.8s ease-in-out infinite;
+}
+
+.anim-icon--chat .anim-icon__chat-dot--d1 {
+    animation-delay: 0.2s;
+}
+
+.anim-icon--chat .anim-icon__chat-dot--d2 {
+    animation-delay: 0.4s;
+}
+
+@keyframes chatDotPulse {
+
+    0%,
+    60%,
+    100% {
+        opacity: 0.3;
+        transform: scale(1);
+    }
+
+    30% {
+        opacity: 0.8;
+        transform: scale(1.3);
+    }
+}
+
+/* ═══════════ COMMON ═══════════ */
+@keyframes drawLine {
+    to {
+        stroke-dashoffset: 0;
+    }
+}
+
+/* --- Hover enhancement on parent --- */
+.landing-service-card:hover .anim-icon,
+.welcome__card:hover .anim-icon,
+.landing-ai__feature:hover .anim-icon {
+    transform: scale(1.12);
+}
+
+/* Reset draw animations on parent hover for re-trigger feel */
+.landing-service-card:hover .anim-icon--shield .anim-icon__checkmark {
+    animation: drawCheck 0.4s ease forwards;
+}
+
+.landing-service-card:hover .anim-icon--building .anim-icon__window {
+    opacity: 0.9;
+}

@@ -1,0 +1,353 @@
+/* ============================================
+   SPLASH SCREEN — Cinematic intro
+   3 phases: enter → reveal → exit
+   ============================================ */
+
+.splash {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    background: var(--bg-primary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+/* ═══════════ BACKGROUND ═══════════ */
+.splash__grid {
+    position: absolute;
+    inset: 0;
+    background-image:
+        linear-gradient(rgba(201, 169, 110, 0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(201, 169, 110, 0.04) 1px, transparent 1px);
+    background-size: 50px 50px;
+    mask-image: radial-gradient(ellipse at center, black 20%, transparent 70%);
+    opacity: 0;
+    animation: splashFadeIn 1s ease 0.3s forwards;
+}
+
+.splash__glow {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(100px);
+    pointer-events: none;
+    opacity: 0;
+    animation: splashGlowIn 1.5s ease 0.2s forwards;
+}
+
+.splash__glow--1 {
+    width: 400px;
+    height: 400px;
+    background: rgba(201, 169, 110, 0.12);
+    top: 20%;
+    left: 30%;
+}
+
+.splash__glow--2 {
+    width: 300px;
+    height: 300px;
+    background: rgba(91, 141, 239, 0.06);
+    bottom: 20%;
+    right: 30%;
+    animation-delay: 0.5s;
+}
+
+/* ═══════════ PARTICLES ═══════════ */
+.splash__particles {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+}
+
+.splash__particle {
+    position: absolute;
+    left: var(--p-x);
+    bottom: -10px;
+    width: var(--p-size);
+    height: var(--p-size);
+    border-radius: 50%;
+    background: var(--gold-primary);
+    opacity: 0;
+    animation: splashParticleRise var(--p-duration) ease var(--p-delay) infinite;
+}
+
+@keyframes splashParticleRise {
+    0% {
+        opacity: 0;
+        transform: translateY(0) scale(0.5);
+    }
+
+    20% {
+        opacity: 0.5;
+    }
+
+    80% {
+        opacity: 0.15;
+    }
+
+    100% {
+        opacity: 0;
+        transform: translateY(-100vh) scale(0);
+    }
+}
+
+/* ═══════════ CENTER CONTENT ═══════════ */
+.splash__content {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0;
+    z-index: 2;
+}
+
+/* ─── Rings ─── */
+.splash__ring {
+    position: absolute;
+    width: 180px;
+    height: 180px;
+    border-radius: 50%;
+    border: 1.5px solid var(--gold-primary);
+    opacity: 0;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -140px) scale(0.5);
+    animation: splashRingIn 1s cubic-bezier(0.34, 1.56, 0.64, 1) 0.2s forwards;
+}
+
+.splash__ring--outer {
+    width: 220px;
+    height: 220px;
+    border-width: 1px;
+    animation: splashRingIn 1s cubic-bezier(0.34, 1.56, 0.64, 1) 0.4s forwards;
+}
+
+@keyframes splashRingIn {
+    0% {
+        opacity: 0;
+        transform: translate(-50%, -140px) scale(0.5);
+    }
+
+    60% {
+        opacity: 0.4;
+        transform: translate(-50%, -140px) scale(1.05);
+    }
+
+    100% {
+        opacity: 0.15;
+        transform: translate(-50%, -140px) scale(1);
+    }
+}
+
+/* ─── Logo ─── */
+.splash__logo-wrapper {
+    width: 120px;
+    height: 120px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 28px;
+    opacity: 0;
+    transform: scale(0.6);
+    animation: splashLogoIn 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) 0.1s forwards;
+}
+
+.splash__logo {
+    height: 90px;
+    width: auto;
+    filter: invert(1) hue-rotate(180deg);
+    opacity: 0.95;
+}
+
+@keyframes splashLogoIn {
+    0% {
+        opacity: 0;
+        transform: scale(0.6);
+    }
+
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* ─── Separator Line ─── */
+.splash__line {
+    width: 0;
+    height: 1.5px;
+    background: linear-gradient(90deg, transparent, var(--gold-primary), transparent);
+    margin-bottom: 24px;
+    animation: splashLineExpand 0.6s ease 0.8s forwards;
+}
+
+@keyframes splashLineExpand {
+    to {
+        width: 140px;
+    }
+}
+
+/* ─── Text ─── */
+.splash__text {
+    text-align: center;
+    opacity: 0;
+    transform: translateY(12px);
+    animation: splashTextIn 0.6s ease 1.2s forwards;
+}
+
+.splash__title {
+    font-size: clamp(1.3rem, 3vw, 1.8rem);
+    font-weight: 700;
+    color: var(--text-primary);
+    letter-spacing: 0.06em;
+    margin-bottom: 6px;
+}
+
+.splash__subtitle {
+    font-size: var(--font-xs);
+    color: var(--gold-primary);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    font-weight: 500;
+}
+
+@keyframes splashTextIn {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ─── Loading Bar ─── */
+.splash__loader {
+    margin-top: 32px;
+    opacity: 0;
+    animation: splashFadeIn 0.4s ease 1.4s forwards;
+}
+
+.splash__loader-track {
+    width: 120px;
+    height: 2px;
+    background: rgba(201, 169, 110, 0.1);
+    border-radius: 2px;
+    overflow: hidden;
+}
+
+.splash__loader-fill {
+    width: 0;
+    height: 100%;
+    background: linear-gradient(90deg, var(--gold-dark), var(--gold-primary));
+    border-radius: 2px;
+    animation: splashLoaderFill 1.4s ease 1.4s forwards;
+}
+
+@keyframes splashLoaderFill {
+    to {
+        width: 100%;
+    }
+}
+
+/* ═══════════ EXIT CURTAINS ═══════════ */
+.splash__curtain {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 50%;
+    background: var(--bg-primary);
+    z-index: 10;
+    transform: scaleX(0);
+}
+
+.splash__curtain--left {
+    left: 0;
+    transform-origin: left center;
+}
+
+.splash__curtain--right {
+    right: 0;
+    transform-origin: right center;
+}
+
+/* ═══════════ PHASE: EXIT ═══════════ */
+.splash--exit .splash__content {
+    animation: splashContentOut 0.5s ease forwards;
+}
+
+.splash--exit .splash__curtain {
+    animation: splashCurtainClose 0.4s ease 0.3s forwards,
+        splashCurtainOpen 0.4s ease 0.6s forwards;
+}
+
+.splash--exit .splash__particles {
+    animation: splashFadeOut 0.3s ease forwards;
+}
+
+@keyframes splashContentOut {
+    to {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+}
+
+@keyframes splashCurtainClose {
+    to {
+        transform: scaleX(1);
+    }
+}
+
+@keyframes splashCurtainOpen {
+    from {
+        transform: scaleX(1);
+    }
+
+    to {
+        transform: scaleX(0);
+    }
+}
+
+/* ═══════════ COMMON ═══════════ */
+@keyframes splashFadeIn {
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes splashFadeOut {
+    to {
+        opacity: 0;
+    }
+}
+
+@keyframes splashGlowIn {
+    0% {
+        opacity: 0;
+        transform: scale(0.5);
+    }
+
+    100% {
+        opacity: 0.8;
+        transform: scale(1);
+    }
+}
+
+/* ═══════════ RESPONSIVE ═══════════ */
+@media (max-width: 768px) {
+    .splash__ring {
+        width: 140px;
+        height: 140px;
+    }
+
+    .splash__ring--outer {
+        width: 180px;
+        height: 180px;
+    }
+
+    .splash__logo {
+        height: 70px;
+    }
+
+    .splash__logo-wrapper {
+        width: 90px;
+        height: 90px;
+    }
+}
