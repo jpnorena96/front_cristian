@@ -7,6 +7,7 @@ import LandingPage from './components/LandingPage';
 import Sidebar from './components/Sidebar';
 import ChatWindow from './components/ChatWindow';
 import Login from './components/Login';
+import AdminPage from './components/admin/AdminPage';
 
 let messageCounter = 0;
 
@@ -29,9 +30,14 @@ export default function App() {
   // Effect to redirect to chat if already authenticated (persistence)
   useEffect(() => {
     if (isAuthenticated && currentPage === 'landing') {
-      setCurrentPage('chat');
+      // Check if admin
+      if (currentUser?.is_admin || currentUser?.isAdmin) {
+        setCurrentPage('admin');
+      } else {
+        setCurrentPage('chat');
+      }
     }
-  }, [isAuthenticated, currentPage]);
+  }, [isAuthenticated, currentPage, currentUser]);
 
   const [conversations, setConversations] = useState([]);
   const [activeConvId, setActiveConvId] = useState(null);
@@ -42,8 +48,13 @@ export default function App() {
 
   // Navigation Handlers
   const navigateToChat = useCallback(() => {
-    setCurrentPage('chat');
-  }, []);
+    // If admin logs in, go to admin page
+    if (currentUser?.is_admin || currentUser?.isAdmin) {
+      setCurrentPage('admin');
+    } else {
+      setCurrentPage('chat');
+    }
+  }, [currentUser]);
 
   const navigateToLanding = useCallback(() => {
     setCurrentPage('landing');
@@ -181,6 +192,15 @@ export default function App() {
     return (
       <Login
         onLogin={navigateToChat}
+        onBack={navigateToLanding}
+      />
+    );
+  }
+
+  if (currentPage === 'admin') {
+    return (
+      <AdminPage
+        onLogout={handleLogout}
         onBack={navigateToLanding}
       />
     );
