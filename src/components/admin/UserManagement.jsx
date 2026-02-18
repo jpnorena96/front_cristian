@@ -145,56 +145,59 @@ export default function UserManagement() {
 
             {/* Modal */}
             {showModal && (
-                <div style={{
-                    position: 'fixed', top: 0, left: 0, right: 0, bottom: 0,
-                    backgroundColor: 'rgba(0,0,0,0.5)', display: 'flex', justifyContent: 'center', alignItems: 'center', zIndex: 1000
-                }}>
-                    <div style={{ background: 'white', padding: '2rem', borderRadius: '8px', width: '400px' }}>
-                        <h2 style={{ marginTop: 0 }}>{currentUser ? 'Editar Usuario' : 'Nuevo Usuario'}</h2>
-                        <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-                            <div>
+                <div className="admin-modal-overlay">
+                    <div className="admin-modal-content">
+                        <h2 className="admin-modal-title">{currentUser ? 'Editar Usuario' : 'Nuevo Usuario'}</h2>
+                        <p className="admin-modal-subtitle">Proporciona la siguiente información para {currentUser ? 'actualizar' : 'crear'} el usuario.</p>
+
+                        <form onSubmit={handleSubmit}>
+                            <div className="admin-form-group">
                                 <label>Nombre Completo</label>
                                 <input
+                                    className="admin-form-input"
                                     type="text"
                                     value={formData.name}
                                     onChange={e => setFormData({ ...formData, name: e.target.value })}
-                                    style={{ width: '100%', padding: '8px', marginTop: '4px' }}
+                                    placeholder="Ej: Juan Pérez"
                                 />
                             </div>
-                            <div>
-                                <label>Email</label>
+                            <div className="admin-form-group">
+                                <label>Correo Electrónico</label>
                                 <input
+                                    className="admin-form-input"
                                     type="email"
                                     value={formData.email}
                                     onChange={e => setFormData({ ...formData, email: e.target.value })}
-                                    style={{ width: '100%', padding: '8px', marginTop: '4px' }}
                                     required
+                                    placeholder="usuario@ejemplo.com"
                                 />
                             </div>
-                            <div>
-                                <label>Contraseña {currentUser && '(Dejar vacío para no cambiar)'}</label>
+                            <div className="admin-form-group">
+                                <label>Contraseña {currentUser && <span style={{ fontWeight: 'normal', fontSize: '0.8em', color: '#666' }}>(Opcional)</span>}</label>
                                 <input
+                                    className="admin-form-input"
                                     type="password"
                                     value={formData.password}
                                     onChange={e => setFormData({ ...formData, password: e.target.value })}
-                                    style={{ width: '100%', padding: '8px', marginTop: '4px' }}
                                     required={!currentUser}
+                                    placeholder={currentUser ? "********" : "Ingresa una contraseña segura"}
                                 />
                             </div>
-                            <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-                                <label style={{ display: 'flex', alignItems: 'center', gap: '5px' }}>
+                            <div className="admin-form-group">
+                                <label className="admin-checkbox-label">
                                     <input
+                                        className="admin-checkbox-input"
                                         type="checkbox"
                                         checked={formData.isAdmin}
                                         onChange={e => setFormData({ ...formData, isAdmin: e.target.checked })}
                                     />
-                                    Es Administrador
+                                    Otorgar permisos de Administrador
                                 </label>
                             </div>
 
-                            <div style={{ display: 'flex', justifyContent: 'flex-end', gap: '10px', marginTop: '1rem' }}>
-                                <button type="button" onClick={() => setShowModal(false)} style={{ padding: '8px 16px', border: '1px solid #ddd', background: 'white', cursor: 'pointer' }}>Cancelar</button>
-                                <button type="submit" style={{ padding: '8px 16px', border: 'none', background: '#1a73e8', color: 'white', cursor: 'pointer' }}>Guardar</button>
+                            <div className="admin-modal-actions">
+                                <button type="button" className="btn-secondary" onClick={() => setShowModal(false)}>Cancelar</button>
+                                <button type="submit" className="btn-primary">Guardar Cambios</button>
                             </div>
                         </form>
                     </div>
