@@ -257,3 +257,116 @@
         opacity: 1;
     }
 }
+
+/* Knowledge Base Styles */
+.kb-upload-zone {
+    border: 2px dashed #e1e4e8;
+    border-radius: 12px;
+    padding: 3rem 2rem;
+    text-align: center;
+    background: #fafbfc;
+    cursor: pointer;
+    transition: all 0.2s;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+.kb-upload-zone:hover {
+    border-color: #1a73e8;
+    background: #f0f7ff;
+}
+
+.kb-upload-icon {
+    width: 48px;
+    height: 48px;
+    color: #1a73e8;
+    opacity: 0.8;
+}
+
+.kb-upload-text {
+    font-size: 1.1rem;
+    color: #333;
+    font-weight: 500;
+}
+
+.kb-upload-subtext {
+    font-size: 0.9rem;
+    color: #666;
+}
+
+.kb-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1.5rem;
+}
+
+.kb-card {
+    background: white;
+    border-radius: 12px;
+    border: 1px solid #e1e4e8;
+    padding: 1.5rem;
+    transition: transform 0.2s, box-shadow 0.2s;
+    display: flex;
+    flex-direction: column;
+}
+
+.kb-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.kb-card-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+}
+
+.kb-icon {
+    width: 40px;
+    height: 40px;
+    background: #ffebee;
+    color: #d32f2f;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.kb-title {
+    font-weight: 600;
+    font-size: 1rem;
+    color: #1a1f36;
+    margin-bottom: 0.5rem;
+    line-height: 1.4;
+    word-break: break-word;
+}
+
+.kb-meta {
+    font-size: 0.8rem;
+    color: #8898aa;
+    margin-top: auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 1rem;
+    border-top: 1px solid #f0f0f0;
+}
+
+.btn-icon {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: #8898aa;
+    padding: 4px;
+    border-radius: 4px;
+    transition: all 0.2s;
+}
+
+.btn-icon:hover {
+    background: #fee2e2;
+    color: #dc2626;
+}

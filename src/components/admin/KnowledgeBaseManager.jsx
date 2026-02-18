@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { AdminService } from '../../services/AdminService';
+import { FileText, UploadCloud, Trash2, Calendar } from 'lucide-react';
 
 export default function KnowledgeBaseManager() {
     const [documents, setDocuments] = useState([]);
@@ -67,66 +68,78 @@ export default function KnowledgeBaseManager() {
 
     return (
         <div className="knowledge-base-manager">
-            <h1 className="admin-title">Base de Conocimiento (Contratos Legales)</h1>
-            <p style={{ color: '#666', marginBottom: '1.5rem' }}>
-                Sube contratos modelo o leyes (PDF) para que la IA los use como referencia al generar respuestas y documentos.
-            </p>
+            <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
+                <h1 className="admin-title">Base de Conocimiento</h1>
+                <p style={{ color: '#666', marginBottom: '2rem', maxWidth: '800px' }}>
+                    Sube contratos modelo, leyes o jurisprudencia en formato PDF. La Inteligencia Artificial analizará estos documentos y los utilizará como contexto legal para generar respuestas más precisas y alineadas a tu criterio.
+                </p>
 
-            <div className="admin-card" style={{ marginBottom: '2rem' }}>
-                <h3 style={{ marginBottom: '1rem' }}>Subir Nuevo Documento</h3>
-                <div style={{ display: 'flex', gap: '1rem', alignItems: 'center' }}>
+                {/* Upload Zone */}
+                <label className="kb-upload-zone">
                     <input
                         type="file"
                         accept=".pdf"
                         onChange={handleFileUpload}
                         disabled={uploading}
-                        style={{ padding: '10px', border: '1px solid #ddd', borderRadius: '4px' }}
+                        style={{ display: 'none' }}
                     />
-                    {uploading && <span style={{ color: '#1a73e8' }}>Subiendo y procesando...</span>}
-                </div>
-                {error && <div style={{ color: 'red', marginTop: '0.5rem' }}>{error}</div>}
-            </div>
+                    <div className="kb-upload-icon">
+                        {uploading ? (
+                            <div className="spinner" style={{ width: 48, height: 48, border: '4px solid #f3f3f3', borderTop: '4px solid #1a73e8', borderRadius: '50%', animation: 'spin 1s linear infinite' }}></div>
+                        ) : (
+                            <UploadCloud size={48} />
+                        )}
+                    </div>
+                    <div>
+                        <div className="kb-upload-text">{uploading ? 'Procesando documento...' : 'Haz clic o arrastra un archivo PDF aquí'}</div>
+                        {!uploading && <div className="kb-upload-subtext">Máximo 10MB. Solo formato PDF</div>}
+                    </div>
+                </label>
+                {error && <div style={{ color: '#d32f2f', marginBottom: '1.5rem', padding: '10px', background: '#ffebee', borderRadius: '8px' }}>⚠️ {error}</div>}
 
-            <div className="admin-card">
-                <h3 style={{ marginBottom: '1rem' }}>Documentos Activos</h3>
+                {/* Document Grid */}
+                <h3 style={{ marginBottom: '1.5rem', color: '#1a1f36' }}>Biblioteca de Documentos ({documents.length})</h3>
+
                 {documents.length === 0 ? (
-                    <p style={{ fontStyle: 'italic', color: '#888' }}>No hay documentos subidos.</p>
+                    <div style={{ textAlign: 'center', padding: '4rem', color: '#8898aa', background: 'white', borderRadius: '12px', border: '1px solid #e1e4e8' }}>
+                        <FileText size={48} style={{ opacity: 0.3, marginBottom: '1rem' }} />
+                        <p>No hay documentos en la base de conocimiento aún.</p>
+                    </div>
                 ) : (
-                    <table className="admin-table" style={{ width: '100%', borderCollapse: 'collapse' }}>
-                        <thead>
-                            <tr style={{ borderBottom: '2px solid #eee', textAlign: 'left' }}>
-                                <th style={{ padding: '12px' }}>Título</th>
-                                <th style={{ padding: '12px' }}>Tipo</th>
-                                <th style={{ padding: '12px' }}>Fecha Subida</th>
-                                <th style={{ padding: '12px' }}>Vista Previa</th>
-                                <th style={{ padding: '12px' }}>Acciones</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {documents.map(doc => (
-                                <tr key={doc.id} style={{ borderBottom: '1px solid #eee' }}>
-                                    <td style={{ padding: '12px', fontWeight: '500' }}>{doc.title}</td>
-                                    <td style={{ padding: '12px' }}>{doc.fileType}</td>
-                                    <td style={{ padding: '12px' }}>{new Date(doc.createdAt).toLocaleDateString()}</td>
-                                    <td style={{ padding: '12px', fontSize: '0.85rem', color: '#666', maxWidth: '200px' }}>
-                                        {doc.contentPreview}
-                                    </td>
-                                    <td style={{ padding: '12px' }}>
-                                        <button
-                                            onClick={() => handleDelete(doc.id)}
-                                            style={{
-                                                border: 'none', background: 'none', color: '#d32f2f', cursor: 'pointer', fontWeight: 'bold'
-                                            }}
-                                        >
-                                            Eliminar
-                                        </button>
-                                    </td>
-                                </tr>
-                            ))}
-                        </tbody>
-                    </table>
+                    <div className="kb-grid">
+                        {documents.map(doc => (
+                            <div className="kb-card" key={doc.id}>
+                                <div className="kb-card-header">
+                                    <div className="kb-icon">
+                                        <FileText size={20} />
+                                    </div>
+                                    <button
+                                        className="btn-icon"
+                                        onClick={() => handleDelete(doc.id)}
+                                        title="Eliminar documento"
+                                    >
+                                        <Trash2 size={18} />
+                                    </button>
+                                </div>
+                                <div className="kb-title">{doc.title}</div>
+                                <div style={{ fontSize: '0.85rem', color: '#666', marginBottom: '1rem', display: '-webkit-box', WebkitLineClamp: 3, WebkitBoxOrient: 'vertical', overflow: 'hidden', height: '3.6em' }}>
+                                    {doc.contentPreview}
+                                </div>
+                                <div className="kb-meta">
+                                    <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+                                        <Calendar size={14} />
+                                        {new Date(doc.createdAt).toLocaleDateString()}
+                                    </div>
+                                    <span style={{ textTransform: 'uppercase', fontSize: '0.7rem', fontWeight: 'bold', background: '#f1f5f9', padding: '2px 6px', borderRadius: '4px' }}>PDF</span>
+                                </div>
+                            </div>
+                        ))}
+                    </div>
                 )}
             </div>
+            <style>{`
+                @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+            `}</style>
         </div>
     );
 }
