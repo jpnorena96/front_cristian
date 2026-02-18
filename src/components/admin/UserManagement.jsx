@@ -4,29 +4,13 @@ import { AdminService } from '../../services/AdminService';
 export default function UserManagement() {
     const [users, setUsers] = useState([]);
     const [loading, setLoading] = useState(true);
+    const [showModal, setShowModal] = useState(false);
+    const [currentUser, setCurrentUser] = useState(null); // If null, creating new
+    const [formData, setFormData] = useState({ name: '', email: '', password: '', role: 'client', isAdmin: false });
 
     useEffect(() => {
         loadUsers();
     }, []);
-
-    const loadUsers = async () => {
-        try {
-            const data = await AdminService.getUsers();
-            if (data && data.users) {
-                setUsers(data.users);
-            }
-        } catch (error) {
-            console.error(error);
-        } finally {
-            setLoading(false);
-        }
-    };
-
-    if (loading) return <div>Cargando usuarios...</div>;
-
-    const [showModal, setShowModal] = useState(false);
-    const [currentUser, setCurrentUser] = useState(null); // If null, creating new
-    const [formData, setFormData] = useState({ name: '', email: '', password: '', role: 'client', isAdmin: false });
 
     // Reset form when modal opens
     useEffect(() => {
@@ -44,6 +28,21 @@ export default function UserManagement() {
             }
         }
     }, [showModal, currentUser]);
+
+    const loadUsers = async () => {
+        try {
+            const data = await AdminService.getUsers();
+            if (data && data.users) {
+                setUsers(data.users);
+            }
+        } catch (error) {
+            console.error(error);
+        } finally {
+            setLoading(false);
+        }
+    };
+
+    if (loading) return <div>Cargando usuarios...</div>;
 
     const handleEdit = (user) => {
         setCurrentUser(user);
