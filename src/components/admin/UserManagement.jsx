@@ -181,6 +181,7 @@ export default function UserManagement() {
                                     onChange={e => setFormData({ ...formData, password: e.target.value })}
                                     required={!currentUser}
                                     placeholder={currentUser ? "********" : "Ingresa una contraseña segura"}
+                                    autoComplete="new-password"
                                 />
                             </div>
                             <div className="admin-form-group">

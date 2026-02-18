@@ -4,6 +4,7 @@ import { logout } from '../../store/userSlice';
 import AdminLayout from './AdminLayout';
 import DashboardOverview from './DashboardOverview';
 import UserManagement from './UserManagement';
+import ConversationInspector from './ConversationInspector';
 import KnowledgeBaseManager from './KnowledgeBaseManager';
 
 export default function AdminPage({ onLogout, onBack }) {
