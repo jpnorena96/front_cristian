@@ -12,6 +12,31 @@ export const AdminService = {
         return res.json();
     },
 
+    createUser: async (userData) => {
+        const res = await fetch(`${API_URL}/api/admin/users`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(userData)
+        });
+        return res.json();
+    },
+
+    updateUser: async (id, userData) => {
+        const res = await fetch(`${API_URL}/api/admin/users/${id}`, {
+            method: 'PUT',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(userData)
+        });
+        return res.json();
+    },
+
+    deleteUser: async (id) => {
+        const res = await fetch(`${API_URL}/api/admin/users/${id}`, {
+            method: 'DELETE'
+        });
+        return res.json();
+    },
+
     getRecentConversations: async (token) => {
         const res = await fetch(`${API_URL}/api/admin/conversations`);
         return res.json();
