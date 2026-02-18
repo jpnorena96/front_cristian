@@ -69,7 +69,8 @@ export default function App() {
 
     // Fetch messages for this conversation
     try {
-      const res = await fetch(`http://localhost:5000/api/conversations/${id}/messages`);
+      const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000';
+      const res = await fetch(`${API_URL}/api/conversations/${id}/messages`);
       const data = await res.json();
       if (data.messages) {
         setMessages(data.messages.map(m => ({
@@ -87,7 +88,8 @@ export default function App() {
   // Fetch history when entering chat
   useEffect(() => {
     if (currentPage === 'chat' && currentUser && currentUser.id) {
-      fetch(`http://localhost:5000/api/conversations/${currentUser.id}`)
+      const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000';
+      fetch(`${API_URL}/api/conversations/${currentUser.id}`)
         .then(res => res.json())
         .then(data => {
           if (data.conversations) setConversations(data.conversations);
@@ -107,7 +109,8 @@ export default function App() {
     setIsLoading(true);
 
     try {
-      const response = await fetch('http://localhost:5000/api/chat', {
+      const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000';
+      const response = await fetch(`${API_URL}/api/chat`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -123,7 +126,8 @@ export default function App() {
         setActiveConvId(data.conversationId);
         // Refresh conversations list to show new title
         if (currentUser) {
-          fetch(`http://localhost:5000/api/conversations/${currentUser.id}`)
+          const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000';
+          fetch(`${API_URL}/api/conversations/${currentUser.id}`)
             .then(res => res.json())
             .then(d => d.conversations && setConversations(d.conversations));
         }
