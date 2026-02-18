@@ -109,6 +109,12 @@ export default function App() {
   }, [currentPage, currentUser]);
 
   const handleSendMessage = useCallback(async (text) => {
+    // If user is not logged in, redirect to login
+    if (!currentUser) {
+      setCurrentPage('login');
+      return;
+    }
+
     // If on landing, switch to chat first
     if (currentPage === 'landing') {
       setCurrentPage('chat');
