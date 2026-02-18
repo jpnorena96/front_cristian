@@ -8,6 +8,7 @@ import Sidebar from './components/Sidebar';
 import ChatWindow from './components/ChatWindow';
 import Login from './components/Login';
 import AdminPage from './components/admin/AdminPage';
+import AuthPromptModal from './components/AuthPromptModal';
 
 let messageCounter = 0;
 
@@ -26,6 +27,8 @@ export default function App() {
 
   // Initialize page based on auth state
   const [currentPage, setCurrentPage] = useState('splash');
+  const [showAuthPrompt, setShowAuthPrompt] = useState(false);
+  const [loginMode, setLoginMode] = useState('login'); // 'login' or 'register'
 
   // Effect to redirect to chat if already authenticated (persistence)
   useEffect(() => {
@@ -36,6 +39,7 @@ export default function App() {
       } else {
         setCurrentPage('chat');
       }
+      setShowAuthPrompt(false);
     }
   }, [isAuthenticated, currentPage, currentUser]);
 
@@ -54,6 +58,7 @@ export default function App() {
     } else {
       setCurrentPage('chat');
     }
+    setShowAuthPrompt(false);
   }, [currentUser]);
 
   const navigateToLanding = useCallback(() => {
@@ -109,9 +114,9 @@ export default function App() {
   }, [currentPage, currentUser]);
 
   const handleSendMessage = useCallback(async (text) => {
-    // If user is not logged in, redirect to login
+    // If user is not logged in, show auth prompt
     if (!currentUser) {
-      setCurrentPage('login');
+      setShowAuthPrompt(true);
       return;
     }
 
@@ -178,8 +183,21 @@ export default function App() {
   );
 
   const navigateToLogin = useCallback(() => {
+    setLoginMode('login');
     setCurrentPage('login');
   }, []);
+
+  const handlePromptLogin = () => {
+    setShowAuthPrompt(false);
+    setLoginMode('login');
+    setCurrentPage('login');
+  };
+
+  const handlePromptRegister = () => {
+    setShowAuthPrompt(false);
+    setLoginMode('register');
+    setCurrentPage('login');
+  };
 
   if (currentPage === 'splash') {
     return <SplashScreen onComplete={() => setCurrentPage('landing')} />;
@@ -190,13 +208,28 @@ export default function App() {
       <>
         <LandingPage onNavigateToChat={navigateToChat} onNavigateToLogin={navigateToLogin} />
         {whatsappBtn}
+        {showAuthPrompt && (
+          <AuthPromptModal
+            onClose={() => setShowAuthPrompt(false)}
+            onLogin={handlePromptLogin}
+            onRegister={handlePromptRegister}
+          />
+        )}
       </>
     );
   }
 
+  // Also include prompt in chat view (when user is guest but viewing chat UI?)
+  // Currently app logic forces login for chat page if persistence works, but 
+  // if handleSendMessage is called from LandingPage, it triggers prompt there.
+  // If we are on 'chat' page but not logged in (guest mode?), we might need it there too.
+  // But logic above: navigateToChat checks for currentUser. 
+  // Let's assume handleSendMessage is primarily triggered from LandingPage or Guest Chat if implemented.
+
   if (currentPage === 'login') {
     return (
       <Login
+        initialMode={loginMode}
         onLogin={navigateToChat}
         onBack={navigateToLanding}
       />
@@ -230,7 +263,13 @@ export default function App() {
         onSendMessage={handleSendMessage}
         onToggleSidebar={() => setSidebarOpen(prev => !prev)}
       />
-
+      {showAuthPrompt && (
+        <AuthPromptModal
+          onClose={() => setShowAuthPrompt(false)}
+          onLogin={handlePromptLogin}
+          onRegister={handlePromptRegister}
+        />
+      )}
     </div>
   );
 }
