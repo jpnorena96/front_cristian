@@ -51,9 +51,11 @@ export default function App() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
   // Navigation Handlers
-  const navigateToChat = useCallback(() => {
+  // Navigation Handlers
+  const navigateToChat = useCallback((user) => {
+    const targetUser = user || currentUser;
     // If admin logs in, go to admin page
-    if (currentUser?.is_admin || currentUser?.isAdmin) {
+    if (targetUser?.is_admin || targetUser?.isAdmin) {
       setCurrentPage('admin');
     } else {
       setCurrentPage('chat');
