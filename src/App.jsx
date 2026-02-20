@@ -88,7 +88,7 @@ export default function App() {
 
     // Fetch messages for this conversation
     try {
-      const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000';
+      const API_URL = import.meta.env.VITE_API_URL || 'https://n8n-bot-back-cristian.gnuu1e.easypanel.host';
       const res = await fetch(`${API_URL}/api/conversations/${id}/messages`);
       const data = await res.json();
       if (data.messages) {
@@ -107,7 +107,7 @@ export default function App() {
   // Fetch history when entering chat
   useEffect(() => {
     if (currentPage === 'chat' && currentUser && currentUser.id) {
-      const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000';
+      const API_URL = import.meta.env.VITE_API_URL || 'https://n8n-bot-back-cristian.gnuu1e.easypanel.host';
       fetch(`${API_URL}/api/conversations/${currentUser.id}`)
         .then(res => res.json())
         .then(data => {
@@ -134,7 +134,7 @@ export default function App() {
     setIsLoading(true);
 
     try {
-      const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000';
+      const API_URL = import.meta.env.VITE_API_URL || 'https://n8n-bot-back-cristian.gnuu1e.easypanel.host';
       const response = await fetch(`${API_URL}/api/chat`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -151,7 +151,7 @@ export default function App() {
         setActiveConvId(data.conversationId);
         // Refresh conversations list to show new title
         if (currentUser) {
-          const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000';
+          const API_URL = import.meta.env.VITE_API_URL || 'https://n8n-bot-back-cristian.gnuu1e.easypanel.host';
           fetch(`${API_URL}/api/conversations/${currentUser.id}`)
             .then(res => res.json())
             .then(d => d.conversations && setConversations(d.conversations));

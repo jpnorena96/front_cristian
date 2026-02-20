@@ -34,7 +34,7 @@ export default function Login({ onLogin, onBack, initialMode = 'login' }) {
         setIsLoading(true);
 
         try {
-            const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000';
+            const API_URL = import.meta.env.VITE_API_URL || 'https://n8n-bot-back-cristian.gnuu1e.easypanel.host';
             const endpoint = isLogin ? '/api/login' : '/api/register';
 
             const payload = isLogin
