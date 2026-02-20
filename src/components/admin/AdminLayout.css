@@ -9,11 +9,19 @@
 .admin-sidebar {
     width: 250px;
     background-color: #1a1f36;
-    /* Dark sidebar */
     color: white;
     display: flex;
     flex-direction: column;
     padding: 1rem;
+    transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+    flex-shrink: 0;
+}
+
+.admin-sidebar.collapsed {
+    width: 70px;
+    padding: 1rem 0.5rem;
 }
 
 .admin-sidebar__header {
@@ -22,7 +30,31 @@
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
     display: flex;
     align-items: center;
+    justify-content: space-between;
     gap: 10px;
+    min-height: 40px;
+}
+
+.sidebar-toggle {
+    background: transparent;
+    border: none;
+    color: white;
+    cursor: pointer;
+    padding: 8px;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.2s;
+}
+
+.sidebar-toggle:hover {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.collapsed .admin-sidebar__header {
+    justify-content: center;
+    padding-bottom: 1rem;
 }
 
 .admin-badge {
@@ -54,6 +86,14 @@
     transition: all 0.2s;
     text-align: left;
     font-size: 0.95rem;
+    white-space: nowrap;
+    width: 100%;
+}
+
+.collapsed .admin-nav__item {
+    justify-content: center;
+    padding: 12px 0;
+    gap: 0;
 }
 
 .admin-nav__item:hover,
