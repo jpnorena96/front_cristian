@@ -97,7 +97,7 @@ export default function Sidebar({ conversations, activeId, onNewChat, onSelectCh
                         Cerrar Sesión
                     </button>
                     <div className="sidebar__footer-info">
-                        <span className="sidebar__footer-name">Dr. Juan Pablo Noreña A.</span>
+                        <span className="sidebar__footer-name">Dr.  Noreña A.</span>
                         <span className="sidebar__footer-role">Abogado Senior · Colombia</span>
                     </div>
                 </div>

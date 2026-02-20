@@ -145,7 +145,7 @@ Antes de proceder, es importante que considere lo siguiente:
 
 Dado el nivel de riesgo identificado, le recomiendo encarecidamente agendar una **Consulta de Fondo** con el Dr. Christian para un análisis personalizado de su situación.
 
-Para formalizar este requerimiento en el sistema de Juan Pablo, necesito validar su perfil. ¿Podría indicarme su nombre completo y correo electrónico?`,
+Para formalizar este requerimiento en el sistema de , necesito validar su perfil. ¿Podría indicarme su nombre completo y correo electrónico?`,
     ],
 };
 
