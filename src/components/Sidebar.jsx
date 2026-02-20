@@ -22,7 +22,7 @@ export default function Sidebar({ conversations, activeId, onNewChat, onSelectCh
                     <div className="sidebar__brand">
                         <img src={logoImg} alt="IuristaTech" className="sidebar__brand-logo" />
                         <div>
-                            <h2 className="sidebar__brand-name">Noreña Aguirre</h2>
+                            <h2 className="sidebar__brand-name">Iurista Tech</h2>
                             <span className="sidebar__brand-tag">Asistente Legal IA</span>
                         </div>
                     </div>

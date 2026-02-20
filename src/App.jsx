@@ -17,6 +17,7 @@ function createMessage(role, content) {
     id: `msg-${++messageCounter}`,
     role,
     content,
+    suggestedActions: [],
     timestamp: new Date(),
   };
 }
@@ -159,6 +160,7 @@ export default function App() {
 
       setAiStatus(data.status || 'analyzing');
       const aiMsg = createMessage('assistant', data.response || "Error: Sin respuesta");
+      aiMsg.suggestedActions = data.suggestedActions || []; // Store suggestions
       setMessages(prev => [...prev, aiMsg]);
 
     } catch (err) {

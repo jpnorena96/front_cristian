@@ -66,7 +66,7 @@ export default function MessageInput({ onSend, disabled }) {
                 </button>
             </div>
             <p className="message-input__disclaimer">
-                Asistente del despacho de Juan Pablo Noreña Aguirre · Las respuestas no constituyen asesoría legal vinculante.
+                Asistente de Iurista Tech · Las respuestas no constituyen asesoría legal vinculante.
             </p>
         </form>
     );

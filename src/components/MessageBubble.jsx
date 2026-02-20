@@ -112,7 +112,7 @@ function renderMarkdown(text) {
     return elements;
 }
 
-export default function MessageBubble({ message }) {
+export default function MessageBubble({ message, onAction }) {
     const { role, content, timestamp } = message;
     const isUser = role === 'user';
 
@@ -154,7 +154,7 @@ export default function MessageBubble({ message }) {
             doc.setPage(i);
             doc.setFontSize(10);
             doc.setTextColor(150);
-            doc.text("Generado por IuristaTech AI - Noreña Aguirre Abogados", 105, 290, { align: "center" });
+            doc.text("Generado por IuristaTech AI", 105, 290, { align: "center" });
         }
 
         doc.save("documento-legal.pdf");
@@ -210,11 +210,31 @@ export default function MessageBubble({ message }) {
                     </div>
                 )}
 
+                {/* Suggested Actions */}
+                {!isUser && message.suggestedActions && message.suggestedActions.length > 0 && (
+                    <div className="message-suggestions">
+                        <p className="message-suggestions__label">Sugerencias:</p>
+                        <div className="message-suggestions__list">
+                            {message.suggestedActions.map((action, idx) => (
+                                <button
+                                    key={idx}
+                                    className="suggestion-btn"
+                                    onClick={() => onAction && onAction(action)}
+                                >
+                                    {action}
+                                </button>
+                            ))}
+                        </div>
+                    </div>
+                )}
+
+
+
                 <span className="message-bubble__time">
                     {formatTimestamp(timestamp)}
                 </span>
             </div>
-        </div>
+        </div >
     );
 }
 

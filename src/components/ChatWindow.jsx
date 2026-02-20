@@ -44,7 +44,7 @@ export default function ChatWindow({ messages, isLoading, aiStatus, onSendMessag
                 ) : (
                     <div className="chat-window__messages-list">
                         {messages.map((msg) => (
-                            <MessageBubble key={msg.id} message={msg} />
+                            <MessageBubble key={msg.id} message={msg} onAction={onSendMessage} />
                         ))}
                         {isLoading && <TypingIndicator />}
                         <div ref={messagesEndRef} />

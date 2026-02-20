@@ -1,0 +1,114 @@
+.pending-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #f4f7fa;
+    padding: 20px;
+}
+
+.pending-card {
+    background: white;
+    padding: 3rem 2rem;
+    border-radius: 16px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+    width: 100%;
+    max-width: 480px;
+    text-align: center;
+    border: 1px solid #e1e4e8;
+    animation: slideUp 0.4s ease-out;
+}
+
+.pending-icon-wrapper {
+    width: 80px;
+    height: 80px;
+    background-color: #fff8e1;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 1.5rem;
+}
+
+.pending-icon {
+    font-size: 40px;
+    animation: pulse 2s infinite ease-in-out;
+}
+
+.pending-title {
+    color: #1a1f36;
+    font-size: 1.75rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+}
+
+.pending-message {
+    color: #4a5568;
+    font-size: 1.05rem;
+    line-height: 1.6;
+    margin-bottom: 2rem;
+}
+
+.pending-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.btn-back-home {
+    background-color: #1a73e8;
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.2s;
+    width: 100%;
+}
+
+.btn-back-home:hover {
+    background-color: #1557b0;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 6px rgba(26, 115, 232, 0.2);
+}
+
+.support-link {
+    color: #64748b;
+    font-size: 0.9rem;
+    text-decoration: none;
+    margin-top: 1rem;
+    display: inline-block;
+}
+
+.support-link:hover {
+    color: #1a73e8;
+    text-decoration: underline;
+}
+
+@keyframes slideUp {
+    from {
+        transform: translateY(20px);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.05);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}

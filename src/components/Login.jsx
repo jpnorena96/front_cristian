@@ -2,6 +2,7 @@
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { setUser } from '../store/userSlice';
+import PendingApproval from './PendingApproval';
 import './Login.css';
 
 export default function Login({ onLogin, onBack, initialMode = 'login' }) {
@@ -12,6 +13,7 @@ export default function Login({ onLogin, onBack, initialMode = 'login' }) {
     const [name, setName] = useState(''); // Only for register
     const [error, setError] = useState('');
     const [isLoading, setIsLoading] = useState(false);
+    const [isPendingApproval, setIsPendingApproval] = useState(false);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -52,15 +54,20 @@ export default function Login({ onLogin, onBack, initialMode = 'login' }) {
                     dispatch(setUser({ user: data.user, token: data.token }));
                     onLogin(data.user);
                 } else {
-                    // Auto-login after register? Or just switch to login?
-                    // Let's trying auto-login if the API returns a token (which register usually does in modern APIs, 
-                    // but if your backend doesn't return token on register, check that).
-                    // Assuming register returns user created.
-                    alert("Registro exitoso. Por favor inicie sesión.");
-                    setIsLogin(true);
+                    // Check if the new user is automatically approved (e.g. first user) or pending
+                    if (data.message && data.message.includes('pendiente')) {
+                        setIsPendingApproval(true);
+                    } else {
+                        alert("Registro exitoso. Por favor inicie sesión.");
+                        setIsLogin(true);
+                    }
                 }
             } else {
-                setError(data.message || (isLogin ? 'Error al iniciar sesión' : 'Error al registrarse'));
+                if (response.status === 403 && data.message && data.message.includes('aprobación')) {
+                    setIsPendingApproval(true);
+                } else {
+                    setError(data.message || (isLogin ? 'Error al iniciar sesión' : 'Error al registrarse'));
+                }
             }
         } catch (err) {
             setError('Error de conexión con el servidor.');
@@ -69,6 +76,14 @@ export default function Login({ onLogin, onBack, initialMode = 'login' }) {
             setIsLoading(false);
         }
     };
+
+    if (isPendingApproval) {
+        return <PendingApproval onBack={() => {
+            setIsPendingApproval(false);
+            setIsLogin(true);
+            setError('');
+        }} />;
+    }
 
     return (
         <div className="login-container">

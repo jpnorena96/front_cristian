@@ -1,6 +1,6 @@
 /**
  * Chat Engine — Simulated AI responses & status detection
- * For the law firm of Juan Pablo Noreña Aguirre
+ * For Iurista Tech
  */
 
 // Keywords that trigger each status capsule

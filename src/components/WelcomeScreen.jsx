@@ -16,7 +16,7 @@ export default function WelcomeScreen({ onQuickAction }) {
                 <div className="welcome__logo">
                     <img src={logoImg} alt="IuristaTech" className="welcome__logo-img" />
                 </div>
-                <h1 className="welcome__title">Noreña Aguirre</h1>
+                <h1 className="welcome__title">Iurista Tech</h1>
                 <p className="welcome__subtitle">Abogados · Asistente Legal IA</p>
                 <p className="welcome__desc">
                     Triaje legal preventivo para Pymes colombianas.
@@ -55,7 +55,7 @@ export default function WelcomeScreen({ onQuickAction }) {
             </div>
 
             <p className="welcome__footer">
-                Despacho del Abogado Juan Pablo Noreña Aguirre · Colombia
+                Iurista Tech · Colombia
             </p>
         </div>
     );

@@ -94,7 +94,7 @@ export default function LandingPage({ onNavigateToChat, onNavigateToLogin }) {
                     <div className="landing-hero__text">
                         {/* Brand name large */}
                         <div className="landing-hero__brand-block">
-                            <img src={logoImg} alt="IuristaTech" className="landing-hero__brand-logo" />
+
                             <span className="landing-hero__brand-name">IuristaTech</span>
                         </div>
 
@@ -220,7 +220,7 @@ export default function LandingPage({ onNavigateToChat, onNavigateToLogin }) {
                 <div className="landing-about__inner">
                     <div className="landing-about__photo-col">
                         <div className="landing-about__photo-frame">
-                            <img src={yoImg} alt="Juan Pablo Noreña Aguirre" className="landing-about__photo" />
+                            <img src={yoImg} alt="Iurista Tech Avatar" className="landing-about__photo" />
                         </div>
                         <div className="landing-about__credentials">
                             <div className="landing-about__credential">
@@ -242,7 +242,7 @@ export default function LandingPage({ onNavigateToChat, onNavigateToLogin }) {
                         <span className="landing-section__label">Sobre Mí</span>
                         <h2 className="landing-section__title">Un abogado que entiende<br />su negocio</h2>
                         <p className="landing-about__bio">
-                            Soy Juan Pablo Noreña Aguirre, abogado con más de 15 años de trayectoria
+                            Soy el asistente legal de Iurista Tech, diseñado con más de 15 años de experiencia jurídica
                             en el ordenamiento jurídico colombiano. Mi enfoque combina la rigurosidad
                             del derecho tradicional con herramientas tecnológicas de última generación.
                         </p>
