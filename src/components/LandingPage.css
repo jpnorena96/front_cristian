@@ -862,7 +862,7 @@
 }
 
 .landing-services__inner {
-    max-width: 1140px;
+    max-width: 1200px;
     margin: 0 auto;
     position: relative;
     z-index: 1;
@@ -875,7 +875,7 @@
 
 .landing-services__grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(2, 1fr);
     gap: var(--space-xl);
     margin-top: var(--space-xl);
     text-align: left;
@@ -1177,7 +1177,7 @@
 }
 
 /* ═══════════════ RESPONSIVE — SERVICES ═══════════════ */
-@media (max-width: 900px) {
+@media (max-width: 768px) {
     .landing-services__grid {
         grid-template-columns: 1fr;
         max-width: 480px;

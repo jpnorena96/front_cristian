@@ -9,6 +9,7 @@ import ChatWindow from './components/ChatWindow';
 import Login from './components/Login';
 import AdminPage from './components/admin/AdminPage';
 import AuthPromptModal from './components/AuthPromptModal';
+import UserProfile from './components/UserProfile';
 
 let messageCounter = 0;
 
@@ -116,7 +117,7 @@ export default function App() {
     }
   }, [currentPage, currentUser]);
 
-  const handleSendMessage = useCallback(async (text) => {
+  const handleSendMessage = useCallback(async (text, file) => {
     // If user is not logged in, show auth prompt
     if (!currentUser) {
       setShowAuthPrompt(true);
@@ -128,20 +129,49 @@ export default function App() {
       setCurrentPage('chat');
     }
 
-    const userMsg = createMessage('user', text);
+    // Build display text with document indicator
+    const displayText = file ? `📎 ${file.name}\n${text}` : text;
+    const userMsg = createMessage('user', displayText);
+    if (file) userMsg.hasDocument = true;
+
     // Optimistic update
     setMessages(prev => [...prev, userMsg]);
     setIsLoading(true);
 
     try {
       const API_URL = import.meta.env.VITE_API_URL || 'https://n8n-bot-back-cristian.gnuu1e.easypanel.host';
+
+      // Step 1: Upload file if present
+      let documentContext = null;
+      if (file) {
+        const formData = new FormData();
+        formData.append('file', file);
+        const uploadRes = await fetch(`${API_URL}/api/upload`, {
+          method: 'POST',
+          body: formData
+        });
+        const uploadData = await uploadRes.json();
+        if (uploadData.error) {
+          const errorMsg = createMessage('assistant', `⚠️ Error al procesar el archivo: ${uploadData.error}`);
+          setMessages(prev => [...prev, errorMsg]);
+          setIsLoading(false);
+          return;
+        }
+        documentContext = {
+          filename: uploadData.filename,
+          text: uploadData.text
+        };
+      }
+
+      // Step 2: Send message with optional document context
       const response = await fetch(`${API_URL}/api/chat`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           userId: currentUser ? currentUser.id : null,
           conversationId: activeConvId,
-          message: text
+          message: text,
+          documentContext: documentContext
         })
       });
 
@@ -249,6 +279,14 @@ export default function App() {
     );
   }
 
+  if (currentPage === 'profile') {
+    return (
+      <UserProfile
+        onBack={() => setCurrentPage('chat')}
+      />
+    );
+  }
+
   return (
     <div className="app">
       <Sidebar
@@ -259,6 +297,8 @@ export default function App() {
         isOpen={sidebarOpen}
         onToggle={() => setSidebarOpen(prev => !prev)}
         onBackToLanding={handleLogout}
+        currentUser={currentUser}
+        onNavigateToLanding={navigateToLanding}
       />
       <ChatWindow
         messages={messages}
@@ -266,6 +306,10 @@ export default function App() {
         aiStatus={aiStatus}
         onSendMessage={handleSendMessage}
         onToggleSidebar={() => setSidebarOpen(prev => !prev)}
+        currentUser={currentUser}
+        onLogin={navigateToLogin}
+        onLogout={handleLogout}
+        onProfile={() => setCurrentPage('profile')}
       />
       {showAuthPrompt && (
         <AuthPromptModal

@@ -358,6 +358,33 @@ export default function LandingPage({ onNavigateToChat, onNavigateToLogin }) {
                                 <span className="landing-service-card__stat-label">tasa de aprobación de visas</span>
                             </div>
                         </div>
+
+                        {/* Service 4 — Diligenciamiento de Títulos */}
+                        <div className="landing-service-card landing-service-card--titulos" style={{ '--card-delay': '450ms', '--card-accent': '#a78bfa', '--card-accent-bg': 'rgba(167, 139, 250, 0.08)' }}>
+                            <div className="landing-service-card__accent" />
+                            <div className="landing-service-card__glow" />
+                            <div className="landing-service-card__header">
+                                <div className="landing-service-card__icon">
+                                    <DocumentIcon size={26} />
+                                    <span className="landing-service-card__icon-ring" />
+                                </div>
+                                <span className="landing-service-card__number">04</span>
+                            </div>
+                            <h3 className="landing-service-card__title">Diligenciamiento<br /><span>de Títulos</span></h3>
+                            <p className="landing-service-card__desc">
+                                Verificación y certificación de tradición y libertad. Garantizamos la seguridad jurídica de su propiedad con un estudio exhaustivo de títulos.
+                            </p>
+                            <ul className="landing-service-card__list">
+                                <li><span className="landing-service-card__check" />Certificados de Tradición y Libertad</li>
+                                <li><span className="landing-service-card__check" />Estudio de títulos de propiedad</li>
+                                <li><span className="landing-service-card__check" />Verificación de gravámenes y limitaciones</li>
+                                <li><span className="landing-service-card__check" />Asesoría en registro de instrumentos públicos</li>
+                            </ul>
+                            <div className="landing-service-card__stat">
+                                <span className="landing-service-card__stat-num">100%</span>
+                                <span className="landing-service-card__stat-label">verificación documental garantizada</span>
+                            </div>
+                        </div>
                     </div>
 
                     {/* Bottom CTA */}

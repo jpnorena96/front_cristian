@@ -175,7 +175,20 @@ export default function MessageBubble({ message, onAction }) {
                     <span className="message-bubble__sender">Asistente Legal</span>
                 )}
                 <div className="message-bubble__text">
-                    {isUser ? content : renderMarkdown(content)}
+                    {isUser ? (
+                        content.startsWith('📎') ? (
+                            <>
+                                <div className="message-bubble__doc-indicator">
+                                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                                        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+                                        <polyline points="14 2 14 8 20 8" />
+                                    </svg>
+                                    <span>{content.split('\n')[0].replace('📎 ', '')}</span>
+                                </div>
+                                <p className="message-paragraph">{content.split('\n').slice(1).join('\n')}</p>
+                            </>
+                        ) : content
+                    ) : renderMarkdown(content)}
                 </div>
 
                 {!isUser && (

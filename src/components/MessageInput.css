@@ -2,16 +2,137 @@
     padding: var(--space-md) var(--space-lg);
     border-top: 1px solid var(--border-subtle);
     background: var(--bg-secondary);
+    position: relative;
 }
 
+.message-input--dragging {
+    border-color: var(--gold-primary);
+}
+
+/* --- File Preview --- */
+.message-input__file-preview {
+    padding: 0 0 var(--space-sm) 0;
+    animation: fadeIn 0.2s ease;
+}
+
+.message-input__file-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-sm);
+    padding: 8px 12px;
+    border-radius: var(--radius-md);
+    background: var(--bg-card);
+    border: 1px solid var(--border-subtle);
+    max-width: 100%;
+}
+
+.message-input__file-chip--pdf {
+    border-color: rgba(239, 68, 68, 0.3);
+    background: rgba(239, 68, 68, 0.06);
+}
+
+.message-input__file-chip--docx {
+    border-color: rgba(59, 130, 246, 0.3);
+    background: rgba(59, 130, 246, 0.06);
+}
+
+.message-input__file-chip--txt {
+    border-color: rgba(156, 163, 175, 0.3);
+    background: rgba(156, 163, 175, 0.06);
+}
+
+.message-input__file-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    border-radius: var(--radius-sm);
+    flex-shrink: 0;
+}
+
+.message-input__file-chip--pdf .message-input__file-icon {
+    background: rgba(239, 68, 68, 0.15);
+    color: #ef4444;
+}
+
+.message-input__file-chip--docx .message-input__file-icon {
+    background: rgba(59, 130, 246, 0.15);
+    color: #3b82f6;
+}
+
+.message-input__file-chip--txt .message-input__file-icon {
+    background: rgba(156, 163, 175, 0.15);
+    color: #9ca3af;
+}
+
+.message-input__file-info {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+}
+
+.message-input__file-name {
+    font-size: var(--font-sm);
+    font-weight: 500;
+    color: var(--text-primary);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 250px;
+}
+
+.message-input__file-size {
+    font-size: var(--font-xs);
+    color: var(--text-tertiary);
+}
+
+.message-input__file-remove {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+    height: 24px;
+    border-radius: var(--radius-sm);
+    color: var(--text-tertiary);
+    flex-shrink: 0;
+    transition: all var(--transition-fast);
+}
+
+.message-input__file-remove:hover {
+    color: var(--status-risk);
+    background: rgba(239, 107, 91, 0.1);
+}
+
+/* --- Drag Overlay --- */
+.message-input__drag-overlay {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-sm);
+    background: rgba(201, 169, 110, 0.08);
+    border: 2px dashed var(--gold-primary);
+    border-radius: var(--radius-md);
+    z-index: 10;
+    color: var(--gold-primary);
+    font-size: var(--font-sm);
+    font-weight: 600;
+    pointer-events: none;
+    animation: fadeIn 0.15s ease;
+}
+
+/* --- Container --- */
 .message-input__container {
     display: flex;
     align-items: flex-end;
-    gap: var(--space-sm);
+    gap: var(--space-xs);
     background: var(--bg-input);
     border: 1px solid var(--border-subtle);
     border-radius: var(--radius-lg);
-    padding: var(--space-sm) var(--space-sm) var(--space-sm) var(--space-md);
+    padding: var(--space-sm) var(--space-sm) var(--space-sm) var(--space-sm);
     transition: border-color var(--transition-fast);
 }
 
@@ -20,6 +141,34 @@
     box-shadow: 0 0 0 3px var(--gold-subtle);
 }
 
+/* --- Attach Button --- */
+.message-input__attach {
+    width: 40px;
+    height: 40px;
+    min-width: 40px;
+    border-radius: var(--radius-md);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-tertiary);
+    transition: all var(--transition-fast);
+}
+
+.message-input__attach:hover {
+    color: var(--gold-primary);
+    background: var(--gold-subtle);
+}
+
+.message-input__attach--active {
+    color: var(--gold-primary);
+}
+
+.message-input__attach:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+}
+
+/* --- Textarea --- */
 .message-input__textarea {
     flex: 1;
     resize: none;
@@ -40,6 +189,7 @@
     cursor: not-allowed;
 }
 
+/* --- Send Button --- */
 .message-input__send {
     width: 40px;
     height: 40px;
@@ -68,6 +218,7 @@
     transform: scale(1.05);
 }
 
+/* --- Disclaimer --- */
 .message-input__disclaimer {
     text-align: center;
     font-size: 0.6875rem;
@@ -76,8 +227,13 @@
     opacity: 0.7;
 }
 
+/* --- Responsive --- */
 @media (max-width: 768px) {
     .message-input {
         padding: var(--space-sm) var(--space-md);
+    }
+
+    .message-input__file-name {
+        max-width: 150px;
     }
 }
